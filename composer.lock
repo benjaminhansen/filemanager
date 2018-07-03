@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3467adf8d2d4aff50f7290966b0176f",
+    "content-hash": "6af51ea803c79b469359a70190ef897c",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -2399,6 +2399,36 @@
     ],
     "packages-dev": [
         {
+            "name": "bjhansen/laravel-artisan-make-view",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/benjaminhansen/LaravelArtisanMakeView.git",
+                "reference": "866f3c37a092267ba8df6637d909c8a7401a5d31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/benjaminhansen/LaravelArtisanMakeView/zipball/866f3c37a092267ba8df6637d909c8a7401a5d31",
+                "reference": "866f3c37a092267ba8df6637d909c8a7401a5d31",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LaravelMakeView\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "bjhansen",
+                    "email": "bjhansen@ualr.edu"
+                }
+            ],
+            "description": "Artisan command to create Blade views",
+            "time": "2018-06-16T00:25:37+00:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.1.0",
             "source": {
@@ -4094,7 +4124,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "bjhansen/laravel-artisan-make-view": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
