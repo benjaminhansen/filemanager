@@ -22,6 +22,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('department', require('./components/Department.vue'));
 Vue.component('department-users', require('./components/DepartmentUsers.vue'));
 Vue.component('department-files', require('./components/DepartmentFiles.vue'));
+Vue.component('global-administrators', require('./components/GlobalAdministrators.vue'));
 
 const app = new Vue({
     el: '#app'

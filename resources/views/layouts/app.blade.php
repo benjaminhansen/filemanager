@@ -11,7 +11,7 @@
         <title>{{ $title }} | File Manager</title>
 
         <script>
-            window.Laravel = {!! json_encode(['app_url' => url('/')]) !!};
+            window.Laravel = {!! json_encode(['app_url' => url('/'), 'current_user_id' => auth()->user()->id]) !!};
         </script>
     </head>
     <body>
@@ -31,6 +31,9 @@
                       @if(auth()->user()->hasPermission('global_administrator'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('admin/departments') }}">Manage Departments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('admin/global-administrators') }}">Manage Global Administrators</a>
                         </li>
                       @endif
                       <li class="nav-item">

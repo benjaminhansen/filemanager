@@ -28,12 +28,14 @@ Route::group(['middleware'=>'checkauth'], function(){
         Route::get('departments/{department_id}/files', 'Admin\\DepartmentFilesController@index');
         Route::get('departments/{department_id}/users', 'Admin\\DepartmentUsersController@index');
         Route::resource('departments', 'Admin\\DepartmentController');
+        Route::get('global-administrators', 'Admin\\GlobalAdministratorsController@index');
     });
 
     Route::group(['prefix' => 'api/v1'], function(){
         Route::group(['prefix' => 'get'], function(){
             Route::get('department/{id?}', 'Api\\DepartmentController@department');
             Route::get('permissions', 'Api\\PermissionsController@permissions');
+            Route::get('global-administrators', 'Api\\GlobalAdministratorsController@get_global_administrators');
         });
 
         Route::group(['prefix'=>'post'], function(){
@@ -44,6 +46,8 @@ Route::group(['middleware'=>'checkauth'], function(){
             Route::post('delete-file', 'Api\\DepartmentController@delete_file');
             Route::post('upload-new-files/{departmentid}', 'Api\\DepartmentController@upload_new_files');
             Route::post('get-file-url/{department_id}', 'Api\\DepartmentController@get_file_url');
+            Route::post('add-global-administrator', 'Api\\GlobalAdministratorsController@add_global_administrator');
+            Route::post('delete-global-administrator', 'Api\\GlobalAdministratorsController@delete_global_administrator');
         });
     });
 });
