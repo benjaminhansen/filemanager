@@ -11,7 +11,7 @@
         <title>{{ $title }} | File Manager</title>
 
         <script>
-            window.Laravel = {!! json_encode(['app_url' => url('/'), 'current_user_id' => auth()->user()->id]) !!};
+            window.Laravel = {!! json_encode(['app_url' => url('/'), 'current_user_id' => auth()->user() == null ? 0 : auth()->user()->id]) !!};
         </script>
     </head>
     <body>
