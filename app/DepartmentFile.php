@@ -27,4 +27,9 @@ class DepartmentFile extends Model
             return url('images/file.png');
         }
     }
+
+    public function department()
+    {
+        return Department::find($this->department_id);
+    }
 }

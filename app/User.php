@@ -73,4 +73,25 @@ class User extends Authenticatable
             return Department::whereIn('id', $ids)->where('enabled', 1)->orderBy('name')->get();
         }
     }
+
+    public function my_recent_uploads()
+    {
+        $five_days_ago = date("Y-m-d G:i:s", strtotime("-5 days"));
+        $files = DepartmentFile::where('uploaded_by', $this->id)->where('created_at', '>', $five_days_ago)->orderBy('created_at', 'desc')->get();
+        return $files;
+    }
+
+    public function my_departments_recent_uploads()
+    {
+        $my_departments = $this->my_departments();
+        $return_files = [];
+        $five_days_ago = date("Y-m-d G:i:s", strtotime("-5 days"));
+        foreach($my_departments as $dept) {
+            $files = DepartmentFile::where('uploaded_by', '<>', $this->id)->where('department_id', $dept->id)->where('created_at', '>', $five_days_ago)->orderBy('created_at', 'desc')->get();
+            foreach($files as $file) {
+                $return_files[] = $file;
+            }
+        }
+        return $return_files;
+    }
 }

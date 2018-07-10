@@ -33,6 +33,9 @@
                             <a class="nav-link" href="{{ url('admin/departments') }}">Manage Departments</a>
                         </li>
                       @endif
+                      <li class="nav-item">
+                          <a class="nav-link" href="https://apps.risevision.com" target="_blank">Access Rise Vision</a>
+                      </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">

@@ -23,46 +23,6 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        if(!auth()->user()->hasPermission('global_administrator')) {
-            return redirect('dashboard');
-        }
-
-        $title = "Create A New Department";
-        return view('department.create', compact('title'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        if(!auth()->user()->hasPermission('global_administrator')) {
-            return redirect('dashboard');
-        }
-
-        $new_department = new Department;
-        $new_department->name = $request->name;
-        $new_department->created_by = auth()->user()->id;
-        $new_department->enabled = 1;
-        $new_department->uri = str_slug($request->name);
-        $new_department->save();
-
-        $dir_path = $new_department->dir_path;
-        File::makeDirectory($dir_path, 0777, true);
-
-        return redirect('department/'.$new_department->id);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -70,40 +30,17 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $department = Department::find($id);
+        if(!$department) {
+            return redirect('departments');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        if(auth()->user()->hasPermission('global_administrator') || auth()->user()->hasPermission('department_administrator', $department->id) || auth()->user()->hasPermission('department_user', $department->id)) {
+            $title = $department->name;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            return view('department.show', compact('title', 'department'));
+        } else {
+            return redirect('departments');
+        }
     }
 }

@@ -27,7 +27,7 @@
                             <td>{{ file.mime }}</td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary" :href="file.full_url" data-fancybox="preview-file">Preview</button>
-                                <button type="button" class="btn btn-sm btn-success" v-clipboard:copy="file.full_url">Get URL</button>
+                                <button type="button" class="btn btn-sm btn-success" v-clipboard:copy="file.full_url" v-clipboard:success="onCopy" v-clipboard:error="onError">Get URL</button>
                             </td>
                             <td><button type="button" class="btn btn-sm btn-danger" @click="deleteFile(file.id)" v-if="can_upload">Delete</button></td>
                         </tr>
@@ -49,7 +49,7 @@
                             </p>
                             <p>
                                 <button type="button" class="btn btn-sm btn-primary" :href="file.full_url" data-fancybox="preview-file">Preview</button>
-                                <button type="button" class="btn btn-sm btn-success" v-clipboard:copy="file.full_url">Get URL</button>
+                                <button type="button" class="btn btn-sm btn-success" v-clipboard:copy="file.full_url" v-clipboard:success="onCopy" v-clipboard:error="onError">Get URL</button>
                                 <button type="button" class="btn btn-sm btn-danger" @click="deleteFile(file.id)" v-if="can_upload">Delete</button>
                             </p>
                         </div>
@@ -227,6 +227,14 @@
             resetData() {
                 this.formData = new FormData(); // Reset it completely
                 this.attachments = [];
+            },
+
+            onCopy(e) {
+                alert("Copied to clipboard!");
+            },
+
+            onError(e) {
+                alert("Failed to copy URL.\n\nHere is the full URL that you can copy manually:\n" + e.text);
             }
         }
     }
