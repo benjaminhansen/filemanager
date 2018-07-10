@@ -13,7 +13,8 @@ class AuthController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Log In With Your Active Directory Account";
+        return view('auth.index', compact('title'));
     }
 
     /**
@@ -24,7 +25,11 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(auth()->attempt($request->only(['username', 'password']))) {
+            return redirect()->intended('/');
+        } else {
+            return redirect()->back()->withMessage('<div class="alert alert-danger">Your username/password was incorrect!</div>')->withInput($request->all());
+        }
     }
 
     public function logout()

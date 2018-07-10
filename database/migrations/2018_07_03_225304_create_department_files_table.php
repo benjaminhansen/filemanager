@@ -18,6 +18,7 @@ class CreateDepartmentFilesTable extends Migration
             $table->integer('department_id');
             $table->integer('uploaded_by');
             $table->string('name');
+            $table->string('friendly_name');
             $table->longText('path');
             $table->string('mime');
             $table->string('size');

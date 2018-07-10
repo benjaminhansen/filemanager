@@ -120,7 +120,7 @@ return [
 
         'ldap' => [
 
-            'discover' => 'userprincipalname',
+            'discover' => 'samaccountname',
 
             'authenticate' => 'distinguishedname',
 
@@ -140,7 +140,7 @@ return [
         |
         */
 
-        'eloquent' => 'email',
+        'eloquent' => 'username',
 
         /*
         |--------------------------------------------------------------------------
@@ -217,7 +217,7 @@ return [
         |
         */
 
-        'column' => 'password',
+        'column' => null,
 
     ],
 
@@ -257,9 +257,13 @@ return [
 
     'sync_attributes' => [
 
-        'email' => 'userprincipalname',
+        'email' => 'mail',
 
-        'name' => 'cn',
+        'username' => 'samaccountname',
+
+        'fname' => 'givenname',
+
+        'lname' => 'sn'
 
     ],
 

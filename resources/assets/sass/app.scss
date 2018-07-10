@@ -12,3 +12,32 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+body {
+    padding-top:75px;
+}
+
+.card-body h4 {
+    padding:0;
+    margin:0;
+}
+
+.display-type-button {
+    margin-right:15px;
+}
+
+.attachment-holder {
+    margin-bottom:10px;
+}
+
+.gallery-col {
+    margin-bottom:25px;
+}
+
+.card-image-header {
+    background-position: center center;
+    background-size: contain;
+    height:100px;
+    background-repeat: no-repeat;
+    margin-top:15px;
+}

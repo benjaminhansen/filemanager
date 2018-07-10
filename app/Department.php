@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Department extends Model
 {
+    use SoftDeletes;
+
     protected $appends = ['users', 'files', 'creator', 'dir_path'];
+    protected $dates = ['deleted_at'];
 
     public function getUsersAttribute()
     {
@@ -15,7 +19,7 @@ class Department extends Model
 
     public function getFilesAttribute()
     {
-        return DepartmentFile::where('department_id', $this->id)->get();
+        return DepartmentFile::where('department_id', $this->id)->orderBy('created_at', 'desc')->get();
     }
 
     public function getCreatorAttribute()

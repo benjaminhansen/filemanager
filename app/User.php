@@ -9,8 +9,6 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $appends = ['my_departments'];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -62,7 +60,7 @@ class User extends Authenticatable
         }
     }
 
-    public function getMyDepartmentsAttribute()
+    public function my_departments()
     {
         if($this->hasPermission('global_administrator')) {
             return Department::orderBy('name')->get();
@@ -72,7 +70,7 @@ class User extends Authenticatable
             foreach($my_departments as $dept) {
                 $ids[] = $dept->department_id;
             }
-            return Department::whereIn('id', $ids)->orderBy('name')->get();
+            return Department::whereIn('id', $ids)->where('enabled', 1)->orderBy('name')->get();
         }
     }
 }

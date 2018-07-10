@@ -16,7 +16,7 @@ class CreateDepartmentUsersTable extends Migration
         Schema::create('department_users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('department_id');
+            $table->integer('department_id')->nullable();
             $table->integer('permission_id');
             $table->timestamps();
         });

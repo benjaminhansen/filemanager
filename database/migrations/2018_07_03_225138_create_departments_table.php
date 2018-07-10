@@ -19,6 +19,7 @@ class CreateDepartmentsTable extends Migration
             $table->integer('created_by');
             $table->integer('enabled');
             $table->string('uri');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

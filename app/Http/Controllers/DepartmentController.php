@@ -18,7 +18,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $title = "My Departments";
-        $departments = auth()->user()->my_departments;
+        $departments = auth()->user()->my_departments();
         return view('department.index', compact('title', 'departments'));
     }
 
