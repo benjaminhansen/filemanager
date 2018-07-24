@@ -14,7 +14,7 @@
 Route::resource('login', 'AuthController');
 Route::get('logout', 'AuthController@logout');
 
-Route::group(['middleware'=>'checkauth'], function(){
+Route::group(['middleware'=>['checkauth', 'is_acceptable_network']], function(){
     Route::get('/', function () {
         return redirect('dashboard');
     });

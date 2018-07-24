@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6af51ea803c79b469359a70190ef897c",
+    "content-hash": "12942a11709649b3689f94d93cd86463",
     "packages": [
         {
             "name": "adldap2/adldap2",

@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'checkauth' => \App\Http\Middleware\CheckAuth::class,
         'isadmin' => \App\Http\Middleware\IsAdmin::class,
         'can_access_department' => \App\Http\Middleware\CanAccessDepartment::class,
+        'is_acceptable_network' => \App\Http\Middleware\IsAcceptableNetwork::class,
     ];
 }
