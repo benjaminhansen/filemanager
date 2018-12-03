@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<p><a href="{{ url('admin/departments/'.$department->id.'/edit') }}" title="Back" class="btn btn-success">Edit</a></p>
+<p>
+    <a href="{{ url('admin/departments/'.$department->id.'/edit') }}" title="Edit" class="btn btn-success">Edit</a>
+    <a href="{{ url('admin/departments/'.$department->id.'/groups') }}" title="LDAP Groups" class="btn btn-primary">LDAP Groups</a>
+</p>
 
 <div class="row">
     <div class="col-md-4">

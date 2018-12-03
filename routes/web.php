@@ -11,7 +11,7 @@
 |
 */
 
-Route::resource('login', 'AuthController');
+Route::get('login', 'AuthController@index');
 Route::get('logout', 'AuthController@logout');
 
 Route::group(['middleware'=>['checkauth', 'is_acceptable_network']], function(){
@@ -25,6 +25,8 @@ Route::group(['middleware'=>['checkauth', 'is_acceptable_network']], function(){
 
     Route::group(['middleware'=>'isadmin', 'prefix'=>'admin'], function(){
         Route::get('/', 'Admin\\IndexController@index');
+        Route::get('departments/{department_id}/groups', 'Admin\\DepartmentGroupsController@index');
+        Route::post('departments/{department_id}/groups', 'Admin\\DepartmentGroupsController@save');
         Route::get('departments/{department_id}/files', 'Admin\\DepartmentFilesController@index');
         Route::get('departments/{department_id}/users', 'Admin\\DepartmentUsersController@index');
         Route::resource('departments', 'Admin\\DepartmentController');
