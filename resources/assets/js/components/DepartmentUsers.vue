@@ -7,7 +7,12 @@
                         <span class="btn">{{ user.user.fname }} {{ user.user.lname }}</span>
                     </div>
                     <div class="col-md-5">
-                        {{ user.permission.name }}
+                        <select class="form-control" :data-userid="user.user.id" disabled>
+                            <option v-for="permission in permissions" :value="permission.id" :selected="permission.id == user.permission.id">{{ permission.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" @click="deleteUser(user.user.id)">Delete</button>
                     </div>
                 </div>
             </div>
