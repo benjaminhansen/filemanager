@@ -39,8 +39,8 @@ class DepartmentGroupsController extends Controller
                 $new_permission_group->ldap_group_dn = $value;
                 $new_permission_group->save();
             }
-
-            return redirect('admin/departments/'.$department_id)->withMessage(['typeid' => 'success', 'message' => 'Department groups saved!', 'timeout' => 5]);
         }
+
+        return redirect('admin/departments/'.$department_id)->withMessage(['typeid' => 'success', 'message' => 'Department groups saved!', 'timeout' => 5]);
     }
 }
