@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Department;
+use App\Permission;
+use App\DepartmentPermissionGroup;
 
 class DepartmentController extends Controller
 {
@@ -28,7 +30,8 @@ class DepartmentController extends Controller
     public function create()
     {
         $title = "Add New Department";
-        return view('admin.department.create', compact('title'));
+        $permissions = Permission::where('slug', '<>', 'global_administrator')->get();
+        return view('admin.department.create', compact('title', 'permissions'));
     }
 
     /**
@@ -51,6 +54,17 @@ class DepartmentController extends Controller
         $new_department->enabled = 1;
         $new_department->uri = str_slug($name);
         $new_department->save();
+
+        $permissions = Permission::where('slug', '<>', 'global_administrator')->get();
+
+        foreach($permissions as $permission) {
+            $group_dn = $request->{"permission_".$permission->id};
+            $new_group = new DepartmentPermissionGroup;
+            $new_group->department_id = $new_department->id;
+            $new_group->permission_id = $permission->id;
+            $new_group->ldap_group_dn = $group_dn;
+            $new_group->save();
+        }
 
         return redirect('admin/departments/'.$new_department->id);
     }
