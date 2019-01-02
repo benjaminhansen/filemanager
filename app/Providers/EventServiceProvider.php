@@ -39,8 +39,6 @@ class EventServiceProvider extends ServiceProvider
                 'assertion' => $user->getRawSamlAssertion()
             ];
 
-            dd($user);
-
             $global_administrator_group = env('GLOBAL_ADMINS_GROUP');
 
             // do a check for the user in the local database
