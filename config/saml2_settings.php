@@ -79,7 +79,21 @@ return $settings = array(
             "serviceName" => "Rise Vision",
             "serviceDescription" => "Rise Vision File Manager",
             "requestedAttributes" => array(
-                "isRequired" => false
+                [
+                    'name' => 'givenName',
+                ],
+                [
+                    'name' => 'sn',
+                ],
+                [
+                    'name' => 'mail',
+                ],
+                [
+                    'name' => 'ualrAlternateUID',
+                ],
+                [
+                    'name' => 'isMemberOf',
+                ]
             )
         ),
 
