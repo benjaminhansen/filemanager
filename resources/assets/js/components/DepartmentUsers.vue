@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="row p-3" v-for="user in department.users">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <span class="btn">{{ user.user.fname }} {{ user.user.lname }}</span>
                     </div>
                     <div class="col-md-5">
