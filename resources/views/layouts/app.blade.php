@@ -41,6 +41,7 @@
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
+                            <h6 class="dropdown-header">({{ auth()->user()->username }})</h6>
                             <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
                           </div>
                         </li>
