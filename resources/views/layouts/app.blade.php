@@ -32,9 +32,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('admin/departments') }}">Manage Departments</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('admin/global-administrators') }}">Manage Global Administrators</a>
-                        </li>
                       @endif
                       <li class="nav-item">
                           <a class="nav-link" href="https://apps.risevision.com" target="_blank">Access Rise Vision</a>

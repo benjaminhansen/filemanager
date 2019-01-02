@@ -3,19 +3,13 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="row p-3" v-for="user in department.users">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <span class="btn">{{ user.user.fname }} {{ user.user.lname }}</span>
                     </div>
                     <div class="col-md-5">
-                        <select class="form-control" :data-userid="user.user.id" @change="updatePermission">
-                            <option v-for="permission in permissions" :value="permission.id" :selected="permission.id == user.permission.id">{{ permission.name }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-danger" @click="deleteUser(user.user.id)">Delete</button>
+                        {{ user.permission.name }}
                     </div>
                 </div>
-                <button type="button" class="btn btn-success btn-block" @click="addNewUser">Add New User</button>
             </div>
         </div>
 
