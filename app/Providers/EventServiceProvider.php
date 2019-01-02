@@ -39,7 +39,7 @@ class EventServiceProvider extends ServiceProvider
                 'assertion' => $user->getRawSamlAssertion()
             ];
 
-            dd($userData);
+            dd($user);
 
             $global_administrator_group = env('GLOBAL_ADMINS_GROUP');
 
