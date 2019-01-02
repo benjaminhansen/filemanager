@@ -61,7 +61,7 @@ return $settings = array(
     // or unencrypted messages if it expects them signed or encrypted
     // Also will reject the messages if not strictly follow the SAML
     // standard: Destination, NameId, Conditions ... are validated too.
-    'strict' => true, //@todo: make this depend on laravel config
+    'strict' => false, //@todo: make this depend on laravel config
 
     // Enable debug mode (to print errors)
     'debug' => env('APP_DEBUG', false),
@@ -74,6 +74,14 @@ return $settings = array(
 
     // Service Provider Data that we are deploying
     'sp' => array(
+
+        "attributeConsumingService" => array(
+            "serviceName" => "Rise Vision",
+            "serviceDescription" => "Rise Vision File Manager",
+            "requestedAttributes" => array(
+                "isRequired" => false
+            )
+        ),
 
         // Specifies constraints on the name identifier to be used to
         // represent the requested subject.
@@ -148,19 +156,19 @@ return $settings = array(
 
         // Indicates that the nameID of the <samlp:logoutRequest> sent by this SP
         // will be encrypted.
-        'nameIdEncrypted' => false,
+        'nameIdEncrypted' => true,
 
         // Indicates whether the <samlp:AuthnRequest> messages sent by this SP
         // will be signed.              [The Metadata of the SP will offer this info]
-        'authnRequestsSigned' => false,
+        'authnRequestsSigned' => true,
 
         // Indicates whether the <samlp:logoutRequest> messages sent by this SP
         // will be signed.
-        'logoutRequestSigned' => false,
+        'logoutRequestSigned' => true,
 
         // Indicates whether the <samlp:logoutResponse> messages sent by this SP
         // will be signed.
-        'logoutResponseSigned' => false,
+        'logoutResponseSigned' => true,
 
         /* Sign the Metadata
          False || True (use sp certs) || array (
@@ -168,22 +176,22 @@ return $settings = array(
                                                     certFileName => 'metadata.crt'
                                                 )
         */
-        'signMetadata' => false,
+        'signMetadata' => true,
 
 
         /** signatures and encryptions required **/
 
         // Indicates a requirement for the <samlp:Response>, <samlp:LogoutRequest> and
         // <samlp:LogoutResponse> elements received by this SP to be signed.
-        'wantMessagesSigned' => false,
+        'wantMessagesSigned' => true,
 
         // Indicates a requirement for the <saml:Assertion> elements received by
         // this SP to be signed.        [The Metadata of the SP will offer this info]
-        'wantAssertionsSigned' => false,
+        'wantAssertionsSigned' => true,
 
         // Indicates a requirement for the NameID received by
         // this SP to be encrypted.
-        'wantNameIdEncrypted' => false,
+        'wantNameIdEncrypted' => true,
 
         // Authentication context.
         // Set to false and no AuthContext will be sent in the AuthNRequest,
@@ -195,21 +203,21 @@ return $settings = array(
     // Contact information template, it is recommended to suply a technical and support contacts
     'contactPerson' => array(
         'technical' => array(
-            'givenName' => 'name',
-            'emailAddress' => 'no@reply.com'
+            'givenName' => 'UA Little Rock IT Services Systems',
+            'emailAddress' => 'itservices-systems-all@ualr.edu'
         ),
         'support' => array(
-            'givenName' => 'Support',
-            'emailAddress' => 'no@reply.com'
+            'givenName' => 'UA Little Rock IT Services',
+            'emailAddress' => 'itservices-help@ualr.edu'
         ),
     ),
 
     // Organization information template, the info in en_US lang is recomended, add more if required
     'organization' => array(
         'en-US' => array(
-            'name' => 'Name',
-            'displayname' => 'Display Name',
-            'url' => 'http://url'
+            'name' => 'University of Arkansas at Little Rock',
+            'displayname' => 'UA Little Rock',
+            'url' => 'https://ualr.edu'
         ),
     ),
 

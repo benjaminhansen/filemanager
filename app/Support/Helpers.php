@@ -5,6 +5,7 @@ namespace App\Support;
 use App\User;
 use App\DepartmentPermissionGroup;
 use App\DepartmentUser;
+use App\Permission;
 
 class Helpers
 {
@@ -82,6 +83,21 @@ class Helpers
                     DepartmentUser::where('user_id', $user->id)->where('permission_id', $up->permission_id)->where('department_id', $up->department_id)->delete();
                 }
             }
+        }
+    }
+
+    public static function auditGlobalAdmin(User $user, $global_administrator_group)
+    {
+        $global_administrator_group = Permission::where('slug', 'global_administrator')->first();
+
+        $permission_already_assigned = DepartmentUser::where('user_id', $user->id)->whereNull('department_id')->where('permission_id', $global_administrator_group->id)->first();
+
+        if(!$permission_already_assigned) {
+            $new_permission = new DepartmentUser;
+            $new_permission->user_id = $user->id;
+            $new_permission->department_id = null;
+            $new_permission->permission_id = $global_administrator_group->id;
+            $new_permission->save();
         }
     }
 }

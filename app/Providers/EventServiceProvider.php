@@ -39,6 +39,8 @@ class EventServiceProvider extends ServiceProvider
                 'assertion' => $user->getRawSamlAssertion()
             ];
 
+            $global_administrator_group = env('GLOBAL_ADMINS_GROUP');
+
             // do a check for the user in the local database
 
             $fname_attr = env('LDAP_ATTR_FNAME', 'givenName');
@@ -60,7 +62,11 @@ class EventServiceProvider extends ServiceProvider
                 $user_found->email = $email;
                 $user_found->save();
 
-                Helpers::auditGroups($user_found, $groups);
+                if(in_array($global_administrator_group, $groups)) {
+                    Helpers::auditGlobalAdmin($user_found, $global_administrator_group);
+                } else {
+                    Helpers::auditGroups($user_found, $groups);
+                }
 
                 auth()->login($user_found);
                 return redirect()->intended('/');
@@ -72,7 +78,11 @@ class EventServiceProvider extends ServiceProvider
                 $new_user->username = $username;
                 $new_user->save();
 
-                Helpers::auditGroups($new_user, $groups);
+                if(in_array($global_administrator_group, $groups)) {
+                    Helpers::auditGlobalAdmin($user_found, $global_administrator_group);
+                } else {
+                    Helpers::auditGroups($user_found, $groups);
+                }
 
                 auth()->login($new_user);
                 return redirect()->intended('/');
