@@ -25,17 +25,19 @@
               <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 @if(auth()->check())
                     <ul class="navbar-nav mr-auto">
-                      <li class="nav-item">
-                        <a class="nav-link" href="{{ url('departments') }}">Departments</a>
-                      </li>
+                      @if(count(auth()->user()->my_departments()) > 0)
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('departments') }}">Departments</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="https://apps.risevision.com" target="_blank">Access Rise Vision</a>
+                          </li>
+                      @endif
                       @if(auth()->user()->hasPermission('global_administrator'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('admin/departments') }}">Manage Departments</a>
                         </li>
                       @endif
-                      <li class="nav-item">
-                          <a class="nav-link" href="https://apps.risevision.com" target="_blank">Access Rise Vision</a>
-                      </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
