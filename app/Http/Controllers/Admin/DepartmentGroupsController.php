@@ -16,7 +16,7 @@ class DepartmentGroupsController extends Controller
         if(!$department) {
             return redirect('admin/departments')->withMessage(['typeid' => 3, 'message' => 'Department not found!', 'timeout' => 5]);
         }
-        $permissions = Permission::all();
+        $permissions = Permission::where('slug', '<>', 'global_administrator')->get();
         $title = "LDAP Group Management";
         return view('admin.groups.index', compact('title', 'department', 'permissions'));
     }
