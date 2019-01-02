@@ -72,7 +72,7 @@ class DepartmentController extends Controller
 
                 return json_encode([
                     'success' => true,
-                    'message' => 'Permission deleted.'
+                    'message' => 'Permission deleted. Please remember to also update the user\'s LDAP account and remove the Rise Vision group assignment(s).'
                 ]);
             } else {
                 return json_encode([
