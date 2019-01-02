@@ -23,7 +23,7 @@
                 <h4><strong>Number of Users</strong>: {{ $department->users->count() }}</h4>
             </div>
             <a href="{{ url('admin/departments/'.$department->id.'/users') }}" class="card-footer">
-                Manage Users
+                View Users
             </a>
         </div>
     </div>
