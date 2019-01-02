@@ -82,8 +82,9 @@ class Helpers
             if(is_null($up->department_id)) {
                 // let's check if the user needs to be removed from the global administrators group
                 if(!in_array($global_administrator_group, $groups)) {
-                    dd('no global user');
                     DepartmentUser::find($up->id)->delete();
+                } else {
+                    dd('we are here');
                 }
             } else {
                 $dept_permission_group = DepartmentPermissionGroup::where('permission_id', $up->permission_id)->where('department_id', $up->department_id)->first();
