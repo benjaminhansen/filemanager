@@ -59,6 +59,8 @@ class Helpers
 
     public static function auditGroups(User $user, $groups = [])
     {
+        $global_administrator_group = env('GLOBAL_ADMINS_GROUP');
+
         foreach($groups as $group) {
             $group_record = DepartmentPermissionGroup::where('ldap_group_dn', $group)->first();
             if($group_record) {
@@ -77,10 +79,17 @@ class Helpers
         // remove access where it is no longer needed
         $users_permissions = DepartmentUser::where('user_id', $user->id)->get();
         foreach($users_permissions as $up) {
-            $dept_permission_group = DepartmentPermissionGroup::where('permission_id', $up->permission_id)->where('department_id', $up->department_id)->first();
-            if($dept_permission_group) {
-                if(!in_array($dept_permission_group->ldap_group_dn, $groups)) {
-                    DepartmentUser::where('user_id', $user->id)->where('permission_id', $up->permission_id)->where('department_id', $up->department_id)->delete();
+            if(is_null($up->department_id)) {
+                // let's check if the user needs to be removed from the global administrators group
+                if(!in_array($global_administrator_group, $groups)) {
+                    DepartmentUser::find($up->id)->delete();
+                }
+            } else {
+                $dept_permission_group = DepartmentPermissionGroup::where('permission_id', $up->permission_id)->where('department_id', $up->department_id)->first();
+                if($dept_permission_group) {
+                    if(!in_array($dept_permission_group->ldap_group_dn, $groups)) {
+                        DepartmentUser::where('user_id', $user->id)->where('permission_id', $up->permission_id)->where('department_id', $up->department_id)->delete();
+                    }
                 }
             }
         }
