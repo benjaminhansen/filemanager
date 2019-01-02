@@ -30,7 +30,7 @@
                             <a class="nav-link" href="{{ url('departments') }}">Departments</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="https://apps.risevision.com" target="_blank">Access Rise Vision</a>
+                              <a class="nav-link" href="https://accounts.google.com/o/oauth2/auth?redirect_uri=https%3A%2F%2Fapps.risevision.com%2F&response_type=permission%20id_token&scope=email%20profile%20openid&openid.realm=&client_id=614513768474.apps.googleusercontent.com&ss_domain=https%3A%2F%2Frisevision.com&prompt=select_account&fetch_basic_profile=true&gsiwebsdk=2" target="_blank">Access Rise Vision</a>
                           </li>
                       @endif
                       @if(auth()->user()->hasPermission('global_administrator'))
