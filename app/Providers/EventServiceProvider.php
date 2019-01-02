@@ -63,8 +63,10 @@ class EventServiceProvider extends ServiceProvider
                 $user_found->save();
 
                 if(in_array($global_administrator_group, $groups)) {
+                    dd('yes global');
                     Helpers::auditGlobalAdmin($user_found, $global_administrator_group);
                 } else {
+                    dd('no global');
                     Helpers::auditGroups($user_found, $groups);
                 }
 
