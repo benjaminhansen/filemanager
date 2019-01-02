@@ -19,7 +19,7 @@ class IsAcceptableNetwork
         if(!Helpers::isAcceptableNetwork(env('ACCEPTABLE_NETWORK_CIDR'))) {
             session()->flush();
             auth()->logout();
-            return redirect('login')->withMessage('<div class="alert alert-warning">'.env('ACCEPTABLE_NETWORK_CIDR_MESSAGE').'</div>');
+            die('<div class="alert alert-warning">'.env('ACCEPTABLE_NETWORK_CIDR_MESSAGE').'</div>');
         }
         return $next($request);
     }
