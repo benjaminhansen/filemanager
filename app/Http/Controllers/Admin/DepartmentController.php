@@ -42,7 +42,7 @@ class DepartmentController extends Controller
         $name = $request->name;
         $already_exists = Department::where('name', $name)->first();
         if($already_exists) {
-            return redirect()->back()->withMessage('<div class="alert alert-warning">A department with the name ['.$name.'] already exists!</div>')->withInput($request->all());
+            return redirect()->back()->withMessage(['typeid' => 'warning', 'message' => 'A department with the name ['.$name.'] already exists!', 'timeout' => 5])->withInput($request->all());
         }
 
         $new_department = new Department;
@@ -108,7 +108,7 @@ class DepartmentController extends Controller
         if($department->name != $request->name) {
             $name_already_exists = Department::where('name', $request->name)->first();
             if($name_already_exists) {
-                return redirect()->back()->withMessage('<div class="alert alert-warning">Another department with the name ['.$request->name.'] already exists.</div>');
+                return redirect()->back()->withMessage(['typeid' => 'warning', 'message' => 'Another department with the name ['.$request->name.'] already exists.', 'timeout' => 5]);
             }
         }
 
@@ -116,7 +116,7 @@ class DepartmentController extends Controller
         $department->enabled = $request->status;
         $department->save();
 
-        return redirect('admin/departments/'.$id)->withMessage('<div class="alert alert-success">Department updated.</div>');
+        return redirect('admin/departments/'.$id)->withMessage(['typeid' => 'success', 'message' => 'Department updated.', 'timeout' => 5]);
     }
 
     /**
@@ -134,6 +134,6 @@ class DepartmentController extends Controller
 
         $department->delete();
 
-        return redirect('admin/departments')->withMessage('<div class="alert alert-success">Department deleted.</div>');
+        return redirect('admin/departments')->withMessage(['typeid' => 'success', 'message' => 'Department deleted.', 'timeout' => 5]);
     }
 }

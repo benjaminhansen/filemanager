@@ -54,7 +54,7 @@
 
             <main role="main" class="container-fluid">
                 <h2 class="page-title">{{ $title }}</h2>
-                {!! session()->get('message') !!}
+                {!! Helpers::message() !!}
                 @yield('content')
             </main>
 

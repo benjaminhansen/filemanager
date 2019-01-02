@@ -14,7 +14,7 @@ class DepartmentGroupsController extends Controller
     {
         $department = Department::find($department_id);
         if(!$department) {
-            return redirect('admin/departments')->withMessage(['typeid' => 3, 'message' => 'Department not found!', 'timeout' => 5]);
+            return redirect('admin/departments')->withMessage(['typeid' => 'danger', 'message' => 'Department not found!', 'timeout' => 5]);
         }
         $permissions = Permission::where('slug', '<>', 'global_administrator')->get();
         $title = "LDAP Group Management";
@@ -32,9 +32,15 @@ class DepartmentGroupsController extends Controller
             if($permission_group) {
                 $permission_group->ldap_group_dn = $value;
                 $permission_group->save();
+            } else {
+                $new_permission_group = new DepartmentPermissionGroup;
+                $new_permission_group->department_id = $department_id;
+                $new_permission_group->permission_id = $permission_id;
+                $new_permission_group->ldap_group_dn = $value;
+                $new_permission_group->save();
             }
 
-            return redirect('admin/departments/'.$department_id)->withMessage(['typeid' => 1, 'message' => 'Department groups saved!', 'timeout' => 5]);
+            return redirect('admin/departments/'.$department_id)->withMessage(['typeid' => 'success', 'message' => 'Department groups saved!', 'timeout' => 5]);
         }
     }
 }

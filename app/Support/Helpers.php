@@ -100,4 +100,18 @@ class Helpers
             $new_permission->save();
         }
     }
+
+    public static function message()
+    {
+        if(session()->has('message')) {
+            $message_object = session()->get('message');
+            $typeid = $message_object['typeid'];
+            $message = $message_object['message'];
+            $timeout = $message_object['timeout'];
+
+            return "<div class='alert alert-$typeid risevision-alert' data-timeout='$timeout'>$message</div>";
+        } else {
+            return "";
+        }
+    }
 }
