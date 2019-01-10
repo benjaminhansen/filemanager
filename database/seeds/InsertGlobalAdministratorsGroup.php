@@ -20,6 +20,6 @@ class InsertGlobalAdministratorsGroup extends Seeder
                 "updated_at" => now()
             ],
         ];
-        DB::table()->insert($data);
+        DB::table('department_permission_groups')->insert($data);
     }
 }
