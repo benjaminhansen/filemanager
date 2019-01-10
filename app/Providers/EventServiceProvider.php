@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Aacotroneo\Saml2\Events\Saml2LoginEvent;
 use App\User;
 use App\Support\Helpers;
+use App\LdapAttribute;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -43,11 +44,40 @@ class EventServiceProvider extends ServiceProvider
 
             // do a check for the user in the local database
 
-            $fname_attr = env('LDAP_ATTR_FNAME', 'givenName');
-            $lname_attr = env('LDAP_ATTR_LNAME', 'sn');
-            $email_attr = env('LDAP_ATTR_EMAIL', 'mail');
-            $username_attr = env('LDAP_ATTR_USERNAME', 'uid');
-            $groups_attr = env('LDAP_ATTR_GROUPS', 'memberOf');
+            $fname_obj = LdapAttribute::where('local_attribute', 'fname')->first();
+            if($fname_obj && !is_null($fname_obj->ldap_attribute)) {
+                $fname_attr = $fname_obj->ldap_attribute;
+            } else {
+                $fname_attr = "givenName";
+            }
+
+            $lname_obj = LdapAttribute::where('local_attribute', 'lname')->first();
+            if($lname_obj && !is_null($lname_obj->ldap_attribute)) {
+                $lname_attr = $lname_obj->ldap_attribute;
+            } else {
+                $lname_attr = "sn";
+            }
+
+            $email_obj = LdapAttribute::where('local_attribute', 'email')->first();
+            if($email_obj && !is_null($email_obj->ldap_attribute)) {
+                $email_attr = $email_obj->ldap_attribute;
+            } else {
+                $email_attr = "mail";
+            }
+
+            $username_obj = LdapAttribute::where('local_attribute', 'username')->first();
+            if($username_obj && !is_null($username_obj->ldap_attribute)) {
+                $username_attr = $username_obj->ldap_attribute;
+            } else {
+                $username_attr = "uid";
+            }
+
+            $groups_obj = LdapAttribute::where('local_attribute', 'groups')->first();
+            if($groups_obj && !is_null($groups_obj->ldap_attribute)) {
+                $groups_attr = $groups_obj->ldap_attribute;
+            } else {
+                $groups_attr = "memberOf";
+            }
 
             $fname = $userData['attributes'][$fname_attr][0];
             $lname = $userData['attributes'][$lname_attr][0];

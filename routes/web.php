@@ -31,6 +31,7 @@ Route::group(['middleware'=>['checkauth', 'is_acceptable_network']], function(){
         Route::get('departments/{department_id}/users', 'Admin\\DepartmentUsersController@index');
         Route::resource('departments', 'Admin\\DepartmentController');
         Route::get('global-administrators', 'Admin\\GlobalAdministratorsController@index');
+        Route::resource('ldap-attributes', 'Admin\\LdapAttributesController')->only(['index', 'store']);
     });
 
     Route::group(['prefix' => 'api/v1'], function(){
