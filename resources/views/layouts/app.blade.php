@@ -38,7 +38,7 @@
                             <a class="nav-link" href="{{ url('admin/departments') }}">Manage Departments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('admin/ldap-attributes') }}">Manage LDAP Attributes</a>
+                            <a class="nav-link" href="{{ url('admin/ldap') }}">Manage LDAP</a>
                         </li>
                       @endif
                     </ul>
