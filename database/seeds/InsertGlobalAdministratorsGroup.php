@@ -15,7 +15,9 @@ class InsertGlobalAdministratorsGroup extends Seeder
             [
                 "department_id" => "-1",
                 "permission_id" => "-1",
-                "ldap_group_dn" => "cn=global-administrators,ou=groups,o=risevision,o=apps,dc=ualr,dc=edu"
+                "ldap_group_dn" => "cn=global-administrators,ou=groups,o=risevision,o=apps,dc=ualr,dc=edu",
+                "created_at" => now(),
+                "updated_at" => now()
             ],
         ];
         DB::table()->insert($data);
