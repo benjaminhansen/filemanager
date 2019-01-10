@@ -8,6 +8,7 @@ use Aacotroneo\Saml2\Events\Saml2LoginEvent;
 use App\User;
 use App\Support\Helpers;
 use App\LdapAttribute;
+use App\DepartmentPermissionGroup;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -40,7 +41,7 @@ class EventServiceProvider extends ServiceProvider
                 'assertion' => $user->getRawSamlAssertion()
             ];
 
-            $global_administrator_group = env('GLOBAL_ADMINS_GROUP');
+            $global_administrator_group = DepartmentPermissionGroup::where('department_id', '-1')->first()->ldap_group_dn;
 
             // do a check for the user in the local database
 
